@@ -1,35 +1,37 @@
 <?php
-    // function save_data_supabase($email, $passwd){
-    //     //Supabase database configuration
-    //     $SUPABASE_URL = "https://ylqvlnwghtqljivoswsb.supabase.co";
-    //     $SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlscXZsbndnaHRxbGppdm9zd3NiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAzODg2OTksImV4cCI6MjA0NTk2NDY5OX0.nturyTBExOMbHo12740LDch6_NPaTI9qS_yutyLoO7Y";
-    //     $url = "$SUPABASE_URL/rest/v1/users";
-    //     $data = [
-    //         "email" => $email,
-    //         "password" => $passwd
-    //     ];
-    //     $options = [
-    //         'http' => [
-    //             'header' => [
-    //                 "Content-Type: application/json",
-    //                 "Authorization: Bearer $SUPABASE_KEY",
-    //                 "apikey: $SUPABASE_KEY",
-    //             ],
-    //             'method' => 'POST',
-    //             'content' => json_encode($data),
-    //         ],
-    //     ];
-    //     $context = stream_context_create($options);
-    //     $response = file_get_contents($url, true, $context);
-    //     // $response_data = json_decode($response, true);
+    function save_data_supabase($firstname, $lastname, $email, $password){
+        //Supabase database configuration
+        $SUPABASE_URL = "https://eeifgbieealmhshkdsdr.supabase.co";
+        $SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlaWZnYmllZWFsbWhzaGtkc2RyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMxODUwODcsImV4cCI6MjA0ODc2MTA4N30.PvRAzvgQ232SD62qTQmix3hP38fGYsLlSKPuQvwV504";
+        $url = "$SUPABASE_URL/rest/v1/users";
+        $data = [
+            "firstname" => $firstname,
+            "lastname" => $lastname,
+            "email" => $email,
+            "password" => $password
+        ];
+        $options = [
+            'http' => [
+                'header' => [
+                    "Content-Type: application/json",
+                    "Authorization: Bearer $SUPABASE_KEY",
+                    "apikey: $SUPABASE_KEY",
+                ],
+                'method' => 'POST',
+                'content' => json_encode($data),
+            ],
+        ];
+        $context = stream_context_create($options);
+        $response = file_get_contents($url, true, $context);
+        // $response_data = json_decode($response, true);
 
-    //     if($response === false) {
-    //         echo "Error: Unable to save data to Supabase";
-    //         exit;
-    //      }
-    //      echo "User has been created."; //. json_encode($response_data);
+        if($response === false) {
+            echo "Error: Unable to save data to Supabase";
+            exit;
+         }
+         echo "User has been created."; //. json_encode($response_data);
          
-    // }
+    }
 
     //DB connection
     require "../api/config/db_connection.php";
@@ -66,7 +68,7 @@
     $result = pg_query($conn, $query);
 
     if ($result) {
-        // save_data_supabase($email, $enc_pass);
+        save_data_supabase($firstname, $lastname, $email, $enc_pass);
         echo "<script>alert('Registration successful!')</script>";
         header("refresh:0;url=http://127.0.0.1/startbootstrap-sb-admin-2-gh-pages/login.html");
     } else {
