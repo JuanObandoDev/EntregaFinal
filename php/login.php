@@ -26,7 +26,7 @@
         }
 
         $user = $users[0];
-        $enc_pass = md5($password); // Asumiendo que las contraseñas se guardan encriptadas con md5
+        $enc_pass = md5($password);
 
         if ($user['password'] === $enc_pass) {
             header('refresh:0; url=http://127.0.0.1/startbootstrap-sb-admin-2-gh-pages/index.html');
