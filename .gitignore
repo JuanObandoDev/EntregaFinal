@@ -1,9 +1,1 @@
-node_modules/
-vendor/
-*.log
-*.env
-*.cache
-*.tmp
-*.bak
-*.DS_Store
-*.lock
+node_modules
